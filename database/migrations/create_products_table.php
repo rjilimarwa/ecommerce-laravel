@@ -1,10 +1,16 @@
 <?php
 
+/**
+ * Created by PhpStorm.
+ * User: pc-tarek
+ * Date: 05/03/2020
+ * Time: 09:54
+ */
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
-class CreateProductsTable extends Migration
+class create_products_table extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +26,11 @@ class CreateProductsTable extends Migration
             $table->string('details')->nullable();
             $table->integer('price');
             $table->text('description');
+            $table->integer('category_id')->default(0);
+            $table->boolean('featured')->default(false);
             $table->timestamps();
+            $table->foreign('category_id')->references('id')->on('categories')
+                ->onDelete('cascade');
         });
     }
 
@@ -33,4 +43,5 @@ class CreateProductsTable extends Migration
     {
         Schema::dropIfExists('products');
     }
+
 }

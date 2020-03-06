@@ -31,4 +31,23 @@ Route::post('/SaveForLater/switchToCart/{product}', 'SaveForLaterController@swit
 
 Route::get('/checkout','ChekoutController@index')->name('checkout.index');
 
+Route::post('/checkout','ChekoutController@store')->name('checkout.store');
+
+Route::get('/thankyou','ConfirmationController@index')->name('confirmation.index');
+
+Route::post('/coupon','CouponsController@store')->name('coupon.store');
+Route::delete('/coupon','CouponsController@destroy')->name('coupon.destroy');
+
 Route::get('empty', function(){Cart::destroy();});
+Auth::routes();
+
+Route::get('search','ShopController@search')->name('search');
+
+Route::get('/register', 'RegistrationController@create')->name('register');
+Route::post('register', 'RegistrationController@store');
+
+Route::get('/login', 'SessionsController@create')->name('login');
+Route::post('login', 'SessionsController@store');
+Route::get('/logout', 'SessionsController@destroy')->name('logout');
+
+Route::get('/home', 'HomeController@index')->name('home');
